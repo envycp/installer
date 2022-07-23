@@ -1,2 +1,22 @@
 #!/bin/bash
 
+# Check if (root) ?
+if [ "x$(id -u)" != 'x0' ]; then
+	echo "Error: this script can only be executed by root"
+	exit 1
+fi
+
+# Check if Debian ?
+if [ "$(head -n1 /etc/issue | cut -f 1 -d ' ')" != "Debian" ]; then
+	echo "Error: this script can only be executed in Debian OS"
+	exit 1
+fi
+
+# Check curl ?
+if [ ! -e '/usr/bin/curl' ]; then
+	echo "Error: curl not found"
+	exit 1
+fi
+
+# Add EnvyCP debian repository
+
